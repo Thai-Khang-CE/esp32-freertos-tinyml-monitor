@@ -167,9 +167,4 @@ typedef struct
  */
 void ce_globals_init(void);
 
-/**
- * @brief Print health metrics to serial
- */
-void ce_print_health_metrics(void);
-
 #endif // CE_CONFIG_GLOBAL_H

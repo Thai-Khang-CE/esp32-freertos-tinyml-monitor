@@ -1,12 +1,6 @@
-#include "ce_global.h"
+
 #include "ce_config_global.h"
 #include "ce_data_types.h"
-
-float glob_temperature = 0;
-float glob_humidity = 0;
-
-
-
 
 String ssid = "ESP32-YOUR NETWORK HERE!!!";
 String password = "12345678";
@@ -37,9 +31,7 @@ SemaphoreHandle_t xSemaphoreHTTP = NULL;
 SemaphoreHandle_t xSemaphoreWiFi = NULL;
 
 // CE Global State
-volatile bool g_wifiConnected = false;
-volatile int8_t g_wifiSignal = -100;
-volatile uint32_t g_wifiUptime = 0;
+
 
 volatile bool g_lightOn = false;
 volatile bool g_fanOn = false;
@@ -78,18 +70,5 @@ void ce_globals_init(void) {
 /**
  * @brief Print health metrics every CHECK_INTERVAL seconds
  */
-void ce_print_health_metrics(void) {
-    static uint32_t lastPrint = 0;
-    uint32_t now = millis();
-    
-    if ((now - lastPrint) >= HEALTH_CHECK_INTERVAL) {
-        Serial.printf("[HEALTH] Uptime: %lu s, FreeHeap: %lu B, WiFi: %s (%d dBm), "
-                      "Temp: %.1f°C, Humidity: %.1f%%, Light: %d, Fan: %d\n",
-                      g_systemUptime, g_freeHeap, 
-                      g_wifiConnected ? "OK" : "DOWN", g_wifiSignal,
-                      g_lastTemperature, g_lastHumidity,
-                      g_lightOn, g_fanOn);
-        lastPrint = now;
-    }
-}
+
 
