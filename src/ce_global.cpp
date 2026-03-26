@@ -1,35 +1,31 @@
-#include "global.h"
+#include "ce_global.h"
+#include "ce_config_global.h"
+#include "ce_data_types.h"
+
 float glob_temperature = 0;
 float glob_humidity = 0;
 
 
-String WIFI_SSID;
-String WIFI_PASS;
-String CORE_IOT_TOKEN;
-String CORE_IOT_SERVER;
-String CORE_IOT_PORT;
+
 
 String ssid = "ESP32-YOUR NETWORK HERE!!!";
 String password = "12345678";
+
 String wifi_ssid = "Hudahadu";
 String wifi_password = "khotinhv";
+
 boolean isWifiConnected = false;
 
 
 SemaphoreHandle_t xBinarySemaphoreInternet = xSemaphoreCreateBinary();
 SemaphoreHandle_t xSemaphoreMutex = xSemaphoreCreateMutex();
 
-QueueHandle_t xQueueForLedBlink = xQueueCreate(5, sizeof(SensorData));
-QueueHandle_t xQueueForNeoPixel = xQueueCreate(5, sizeof(SensorData));
 QueueHandle_t xQueueForTinyML   = xQueueCreate(5, sizeof(SensorData));
-QueueHandle_t xQueueForMainServer = xQueueCreate(5, sizeof(MLResult));
+
 QueueHandle_t xQueueTempHumiForMain = xQueueCreate(5, sizeof(SensorData));
 QueueHandle_t xQueueLatestState = xQueueCreate(1, sizeof(MLResult));
-QueueHandle_t xQueueForIoT = xQueueCreate(5, sizeof(SensorData));
 
-// Unified config & global file + legacy support
-#include "ce_config_global.h"
-#include "ce_data_types.h"
+
 
 // CE Queues
 QueueHandle_t xQueueSensorData = NULL;
@@ -51,12 +47,7 @@ volatile char g_lastCommandId[32] = {0};
 
 volatile float g_lastTemperature = 0.0f;
 volatile float g_lastHumidity = 0.0f;
-volatile bool g_sensorValid = false;
-volatile float g_lastAnomalyScore = 0.0f;
 
-volatile uint32_t g_systemUptime = 0;
-volatile uint32_t g_freeHeap = 0;
-volatile uint8_t g_errorCount = 0;
 
 /**
  * @brief Initialize CE queues and semaphores

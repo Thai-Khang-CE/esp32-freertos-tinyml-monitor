@@ -11,9 +11,7 @@
   SMART HOME CE FIRMWARE - UNIFIED CONFIG & GLOBALS
   Platform: ESP32 YOLO UNO
   Author: CE Team (Khang + Dat)
-  
-  Merged from: ce_config.h + ce_global.h + global.h
-  Cleaned: Removed 25+ unused variables & duplicates
+
   ============================================================*/
 
 // ============================================================
@@ -135,12 +133,8 @@ extern float glob_temperature;
 extern float glob_humidity;
 
 // Legacy queues (old project)
-extern QueueHandle_t xQueueForLedBlink;
-extern QueueHandle_t xQueueForNeoPixel;
 extern QueueHandle_t xQueueForTinyML;
-extern QueueHandle_t xQueueForMainServer;
 extern QueueHandle_t xQueueTempHumiForMain;
-extern QueueHandle_t xQueueForIoT;
 
 // Legacy semaphores (old project)
 extern SemaphoreHandle_t xSemaphoreMutex;

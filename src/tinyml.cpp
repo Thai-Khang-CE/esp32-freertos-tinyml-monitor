@@ -169,8 +169,7 @@ void tiny_ml_task(void *pvParameters)
             ml_result.inference_result = result;
             ml_result.anomaly_detected = anomaly_detected;
             ml_result.anomaly_type = anomaly_type;
-
-            xQueueSend(xQueueForMainServer, &ml_result, 0);
+            
             if (xSemaphoreTake(xSemaphoreMutex, portMAX_DELAY) == pdTRUE)
             {
                 Serial.print("[TinyML] T:");

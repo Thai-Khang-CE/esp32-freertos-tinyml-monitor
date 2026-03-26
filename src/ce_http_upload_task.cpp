@@ -17,10 +17,6 @@ void http_upload_task(void *parameter) {
         doc["deviceId"] = CE_DEVICE_ID;
         doc["temperature"] = g_lastTemperature;
         doc["humidity"] = g_lastHumidity;
-        doc["anomaly"] = g_lastAnomalyScore > 0.5f;
-        doc["anomalyScore"] = g_lastAnomalyScore;
-        doc["dataQuality"] = 0.95f;
-        doc["timestamp"] = time(NULL);
         
         String json_str;
         serializeJson(doc, json_str);

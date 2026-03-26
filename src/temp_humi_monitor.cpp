@@ -41,11 +41,9 @@ void temp_humi_monitor(void *pvParameters){
         SensorData sensordata;
         sensordata.temperature = temperature;
         sensordata.humidity = humidity;
-        xQueueSend(xQueueForLedBlink, &sensordata, 0);
-        xQueueSend(xQueueForNeoPixel, &sensordata, 0);
+       
         xQueueSend(xQueueForTinyML, &sensordata, 0);
         xQueueSend(xQueueTempHumiForMain, &sensordata, 0); 
-        xQueueSend(xQueueForIoT, &sensordata, 0);
 
             lcd.clear();
 
