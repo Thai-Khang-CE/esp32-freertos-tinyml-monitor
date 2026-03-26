@@ -1,5 +1,5 @@
 #include "temp_humi_monitor.h"
-#include "global.h"
+#include "ce_config_global.h"
 DHT20 dht20;
 LiquidCrystal_I2C lcd(33,16,2);
 

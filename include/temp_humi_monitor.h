@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "LiquidCrystal_I2C.h"
 #include "DHT20.h"
-#include "global.h"
+#include "ce_config_global.h"
 
 void temp_humi_monitor(void *pvParameters);
 

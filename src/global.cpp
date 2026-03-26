@@ -27,13 +27,9 @@ QueueHandle_t xQueueTempHumiForMain = xQueueCreate(5, sizeof(SensorData));
 QueueHandle_t xQueueLatestState = xQueueCreate(1, sizeof(MLResult));
 QueueHandle_t xQueueForIoT = xQueueCreate(5, sizeof(SensorData));
 
-// ============================================================
-// CE FIRMWARE GLOBALS
-// ============================================================
-
-#include "ce_global.h"
+// Unified config & global file + legacy support
+#include "ce_config_global.h"
 #include "ce_data_types.h"
-#include "ce_config.h"
 
 // CE Queues
 QueueHandle_t xQueueSensorData = NULL;

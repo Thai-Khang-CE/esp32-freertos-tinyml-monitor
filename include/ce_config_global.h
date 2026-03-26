@@ -1,0 +1,181 @@
+#ifndef CE_CONFIG_GLOBAL_H
+#define CE_CONFIG_GLOBAL_H
+
+#include <Arduino.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/queue.h>
+#include <freertos/semphr.h>
+#include "ce_data_types.h"
+
+/*============================================================
+  SMART HOME CE FIRMWARE - UNIFIED CONFIG & GLOBALS
+  Platform: ESP32 YOLO UNO
+  Author: CE Team (Khang + Dat)
+  
+  Merged from: ce_config.h + ce_global.h + global.h
+  Cleaned: Removed 25+ unused variables & duplicates
+  ============================================================*/
+
+// ============================================================
+// HARDWARE PINS
+// ============================================================
+#define RELAY_LIGHT_PIN     12    // Light relay GPIO
+#define RELAY_FAN_PIN       13    // Fan relay GPIO
+
+// ============================================================
+// RELAY CONFIGURATION
+// ============================================================
+#define RELAY_ON_STATE      HIGH   // Active HIGH
+#define RELAY_OFF_STATE     LOW
+
+// ============================================================
+// FREERTOS TASK CONFIGURATION
+// ============================================================
+#define WIFI_TASK_STACK     3072
+#define WIFI_TASK_PRIO      1
+
+#define RELAY_TASK_STACK    2048
+#define RELAY_TASK_PRIO     1
+
+#define HTTP_UPLOAD_TASK_STACK  4096
+#define HTTP_UPLOAD_TASK_PRIO   2
+#define HTTP_UPLOAD_INTERVAL    30000 // ms (30 seconds)
+
+#define HTTP_COMMAND_TASK_STACK 4096
+#define HTTP_COMMAND_TASK_PRIO  2
+#define HTTP_COMMAND_INTERVAL   10000 // ms (10 seconds)
+
+#define TINYML_TASK_STACK   4096
+#define TINYML_TASK_PRIO    2
+
+#define SENSOR_TASK_STACK   2048
+#define SENSOR_TASK_PRIO    3     // High priority
+#define SENSOR_READ_INTERVAL 5000 // ms (5 seconds)
+
+// ============================================================
+// QUEUE SIZES
+// ============================================================
+#define QUEUE_SENSOR_SIZE   16
+#define QUEUE_RELAY_SIZE    8
+#define QUEUE_STATUS_SIZE   4
+
+// ============================================================
+// WIFI CONFIGURATION
+// ============================================================
+#define CE_WIFI_SSID           "Your_WiFi_SSID"
+#define CE_WIFI_PASSWORD       "Your_Password"
+#define CE_WIFI_RECONNECT_INTERVALS {5000, 10000, 20000, 30000} // Exponential backoff
+
+// ============================================================
+// BACKEND API CONFIGURATION
+// ============================================================
+#define CE_BACKEND_URL         "http://192.168.1.50:3000"
+#define CE_DEVICE_ID           "esp32-01"
+#define CE_DEVICE_SECRET       ""  // Empty = no auth header
+
+// API Endpoints
+#define API_SENSORS_DATA    "/api/sensors/data"
+#define API_DEVICES_COMMAND "/api/devices/command"
+
+// ============================================================
+// SERIAL DEBUG
+// ============================================================
+#define SERIAL_BAUD         115200
+#define HEALTH_CHECK_INTERVAL 60000 // Print health metrics every 60s
+
+// ============================================================
+// CE QUEUES FOR INTER-TASK COMMUNICATION
+// ============================================================
+
+// Sensor readings: SensorTask -> TinyMLTask, HttpUploadTask
+extern QueueHandle_t xQueueSensorData;
+
+// Relay commands: CommandPollTask -> RelayTask
+extern QueueHandle_t xQueueCommand;
+
+// Device status: RelayTask -> HttpUploadTask
+extern QueueHandle_t xQueueStatus;
+
+// ============================================================
+// CE SEMAPHORES & MUTEXES
+// ============================================================
+
+// HTTP Mutex: Ensure only one HTTP request at a time
+extern SemaphoreHandle_t xSemaphoreHTTP;
+
+// WiFi connection binary semaphore
+extern SemaphoreHandle_t xSemaphoreWiFi;
+
+// ============================================================
+// CE GLOBAL STATE VARIABLES
+// ============================================================
+
+// WiFi state
+extern volatile bool g_wifiConnected;
+extern volatile int8_t g_wifiSignal;     // RSSI (dBm)
+
+// Device state
+extern volatile bool g_lightOn;
+extern volatile bool g_fanOn;
+
+// Sensor state
+extern volatile float g_lastTemperature;
+extern volatile float g_lastHumidity;
+extern volatile float g_lastAnomalyScore;
+
+// System state
+extern volatile uint32_t g_systemUptime; // seconds
+extern volatile uint32_t g_freeHeap;    // bytes
+
+// ============================================================
+// LEGACY GLOBALS (from old project) - KEEP FOR COMPATIBILITY
+// ============================================================
+
+extern float glob_temperature;
+extern float glob_humidity;
+
+// Legacy queues (old project)
+extern QueueHandle_t xQueueForLedBlink;
+extern QueueHandle_t xQueueForNeoPixel;
+extern QueueHandle_t xQueueForTinyML;
+extern QueueHandle_t xQueueForMainServer;
+extern QueueHandle_t xQueueTempHumiForMain;
+extern QueueHandle_t xQueueForIoT;
+
+// Legacy semaphores (old project)
+extern SemaphoreHandle_t xSemaphoreMutex;
+
+// ============================================================
+// LEGACY DATA TYPES (for backward compatibility)
+// ============================================================
+
+typedef struct {
+    float temperature;
+    float humidity;
+} SensorData;
+
+typedef struct 
+{
+    float temperature;
+    float humidity;
+    float inference_result;
+    bool anomaly_detected;
+    String anomaly_type;
+} MLResult;
+
+// ============================================================
+// INITIALIZATION FUNCTIONS
+// ============================================================
+
+/**
+ * @brief Initialize all CE global queues and semaphores
+ * Called from setup() before task creation
+ */
+void ce_globals_init(void);
+
+/**
+ * @brief Print health metrics to serial
+ */
+void ce_print_health_metrics(void);
+
+#endif // CE_CONFIG_GLOBAL_H

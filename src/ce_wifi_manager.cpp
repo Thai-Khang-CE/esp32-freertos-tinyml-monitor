@@ -1,6 +1,5 @@
 #include "ce_wifi_manager.h"
-#include "ce_global.h"
-#include "ce_config.h"
+#include "ce_config_global.h"
 #include <WiFi.h>
 
 void wifi_manager_task(void *parameter) {

@@ -1,6 +1,5 @@
 #include "ce_http_upload_task.h"
-#include "ce_global.h"
-#include "ce_config.h"
+#include "ce_config_global.h"
 #include "ce_http_client.h"
 #include <ArduinoJson.h>
 

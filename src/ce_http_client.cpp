@@ -1,5 +1,5 @@
 #include "ce_http_client.h"
-#include "ce_config.h"
+#include "ce_config_global.h"
 #include <WiFiClient.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>

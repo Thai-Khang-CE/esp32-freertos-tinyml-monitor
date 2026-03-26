@@ -1,6 +1,5 @@
 #include "ce_relay_task.h"
-#include "ce_global.h"
-#include "ce_config.h"
+#include "ce_config_global.h"
 
 bool relay_task_init(void) {
     pinMode(RELAY_LIGHT_PIN, OUTPUT);

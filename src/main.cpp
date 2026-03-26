@@ -1,13 +1,10 @@
-#include "global.h"
+// Unified config & global file
+#include "ce_config_global.h"
 #include "temp_humi_monitor.h"
 //#include "mainserver.h"
 #include "tinyml.h"
 
-
-
-// CE Firmware includes
-#include "ce_global.h"
-#include "ce_config.h"
+// CE Firmware task headers
 #include "ce_relay_task.h"
 #include "ce_http_upload_task.h"
 #include "ce_command_poll_task.h"

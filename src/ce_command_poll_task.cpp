@@ -1,6 +1,5 @@
 #include "ce_command_poll_task.h"
-#include "ce_global.h"
-#include "ce_config.h"
+#include "ce_config_global.h"
 #include "ce_http_client.h"
 
 void command_poll_task(void *parameter) {
