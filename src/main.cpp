@@ -8,7 +8,6 @@
 
 // include task
 #include "task_toogle_boot.h"
-#include "mainserver.h"
 
 // CE Firmware includes
 #include "ce_global.h"
@@ -28,9 +27,7 @@ void setup()
   Serial.println("[BOOT] CE globals initialized");
   
   // Create legacy tasks (old project)
-  xTaskCreate(led_blinky, "Task LED Blink", 4096, NULL, 2, NULL);
   xTaskCreate(temp_humi_monitor, "Task TEMP HUMI Monitor", 4096, NULL, 2, NULL);
-  xTaskCreate(main_server_task, "Task Main Server" , 16384  ,NULL  ,2 , NULL);
   xTaskCreate(tiny_ml_task, "Tiny ML Task" ,8192  ,NULL  ,2 , NULL);
  
   
