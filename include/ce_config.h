@@ -81,16 +81,7 @@
 #define SENSOR_HUMIDITY_MIN 0.0f
 #define SENSOR_HUMIDITY_MAX 100.0f
 
-// Filtering parameters
-#define FILTER_ALPHA        0.3f  // Exponential smoothing factor
-#define FILTER_ZSCORE_THRESHOLD 2.5f  // Z-score for outlier detection
-#define FILTER_OUTLIER_WINDOW 5   // Number of readings to track for outlier detection
 
-// ============================================================
-// TINYML CONFIGURATION
-// ============================================================
-#define TINYML_ANOMALY_THRESHOLD 0.5f  // Score threshold for anomaly
-#define TINYML_TENSOR_ARENA_SIZE  8192 // Bytes for TFLite tensor arena
 
 // ============================================================
 // RELAY CONFIGURATION

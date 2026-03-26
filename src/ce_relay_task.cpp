@@ -18,7 +18,7 @@ bool relay_set(RelayDevice device, bool state) {
     uint8_t level = state ? RELAY_ON_STATE : RELAY_OFF_STATE;
     
     digitalWrite(pin, level);
-    delay(RELAY_DEBOUNCE_MS);
+    vTaskDelay(pdMS_TO_TICKS(100)); // Short delay to allow relay to switch
     
     // Verify
     uint8_t read_level = digitalRead(pin);
