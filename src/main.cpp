@@ -1,13 +1,9 @@
 #include "global.h"
-
-#include "led_blinky.h"
 #include "temp_humi_monitor.h"
 //#include "mainserver.h"
 #include "tinyml.h"
 
 
-// include task
-#include "task_toogle_boot.h"
 
 // CE Firmware includes
 #include "ce_global.h"

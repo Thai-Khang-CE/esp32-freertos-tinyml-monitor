@@ -73,13 +73,6 @@
 #define HTTP_RETRY_COUNT    3     // Retry attempts
 #define HTTP_RETRY_DELAY_MS 5000  // Delay between retries
 
-// ============================================================
-// SENSOR CONFIGURATION
-// ============================================================
-#define SENSOR_TEMP_MIN     -40.0f
-#define SENSOR_TEMP_MAX     85.0f
-#define SENSOR_HUMIDITY_MIN 0.0f
-#define SENSOR_HUMIDITY_MAX 100.0f
 
 
 
@@ -88,7 +81,7 @@
 // ============================================================
 #define RELAY_ON_STATE      HIGH   // Active HIGH
 #define RELAY_OFF_STATE     LOW
-#define RELAY_VERIFICATION_RETRIES 3
+
 
 // ============================================================
 // SERIAL DEBUG
