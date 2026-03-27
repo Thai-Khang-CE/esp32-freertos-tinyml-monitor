@@ -19,7 +19,7 @@ QueueHandle_t xQueueForTinyML   = xQueueCreate(5, sizeof(SensorData));
 QueueHandle_t xQueueTempHumiForMain = xQueueCreate(5, sizeof(SensorData));
 QueueHandle_t xQueueLatestState = xQueueCreate(1, sizeof(MLResult));
 
-
+QueueHandle_t xQueueforAuto = xQueueCreate(5, sizeof(SensorData));
 
 // CE Queues
 QueueHandle_t xQueueSensorData = NULL;
@@ -39,6 +39,10 @@ volatile char g_lastCommandId[32] = {0};
 
 volatile float g_lastTemperature = 0.0f;
 volatile float g_lastHumidity = 0.0f;
+
+//  default mode is auto
+bool IsFan_Auto = true;
+bool IsLight_Auto = true;
 
 
 /**

@@ -129,12 +129,10 @@ extern volatile uint32_t g_freeHeap;    // bytes
 // LEGACY GLOBALS (from old project) - KEEP FOR COMPATIBILITY
 // ============================================================
 
-extern float glob_temperature;
-extern float glob_humidity;
-
 // Legacy queues (old project)
 extern QueueHandle_t xQueueForTinyML;
 extern QueueHandle_t xQueueTempHumiForMain;
+extern QueueHandle_t xQueueforAuto;
 
 // Legacy semaphores (old project)
 extern SemaphoreHandle_t xSemaphoreMutex;
@@ -143,9 +141,16 @@ extern SemaphoreHandle_t xSemaphoreMutex;
 // LEGACY DATA TYPES (for backward compatibility)
 // ============================================================
 
+// manual mode or auto mode
+
+extern bool IsLight_Auto;
+extern bool IsFan_Auto;
+
 typedef struct {
     float temperature;
     float humidity;
+    float light;
+    bool human_inside;
 } SensorData;
 
 typedef struct 

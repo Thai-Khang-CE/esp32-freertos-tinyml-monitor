@@ -4,22 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-/*============================================================
-  DATA TYPES FOR CE FIRMWARE
-  ============================================================*/
 
-// ============================================================
-// SENSOR DATA
-// ============================================================
 
-// Unfiltered sensor reading
-typedef struct {
-    float temperature;      // °C
-    float humidity;         // %
-    uint32_t timestamp;     // Unix timestamp
-    bool valid;             // Data validity flag
-    uint8_t errorCount;     // Error counter
-} CE_SensorRaw;
 
 // Filtered sensor reading with TinyML results
 typedef struct {
@@ -125,22 +111,9 @@ typedef struct {
     uint32_t timestamp;
 } DeviceMetadata;
 
-// ============================================================
-// TINYML STATE
-// ============================================================
 
-typedef struct {
-    float inputTemp;        // Normalized temp [0, 1]
-    float inputHumidity;    // Normalized humidity [0, 1]
-    float outputScore;      // Anomaly score [0, 1]
-    bool anomalyDetected;
-    uint32_t inferenceTime; // ms
-    uint32_t timestamp;
-} TinyMLInference;
 
-// ============================================================
-// ERROR CODES
-// ============================================================
+
 
 typedef enum {
     CE_ERR_OK = 0,
