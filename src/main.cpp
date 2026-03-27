@@ -5,6 +5,7 @@
 #include "tinyml.h"
 
 // CE Firmware task headers
+#include "ce_auto_relay_task.h"
 #include "ce_http_upload_task.h"
 #include "ce_command_poll_task.h"
 #include "ce_wifi_manager.h"
@@ -25,7 +26,8 @@ void setup()
   
   // Create CE tasks
   Serial.println("[BOOT] Creating CE tasks...");
-  xTaskCreate(wifi_manager_task, "WiFi Manager", 4096, NULL, 3, NULL);
+  xTaskCreate(wifi_manager_task, "WiFi Manager", WIFI_TASK_STACK, NULL, WIFI_TASK_PRIO, NULL);
+  xTaskCreate(ce_auto_relay_task, "Auto Relay", AUTO_RELAY_TASK_STACK, NULL, AUTO_RELAY_TASK_PRIO, NULL);
   
   Serial.println("[BOOT] Setup complete - all tasks created");
 }

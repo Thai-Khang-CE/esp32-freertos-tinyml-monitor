@@ -19,6 +19,8 @@
 // ============================================================
 #define RELAY_LIGHT_PIN     12    // Light relay GPIO
 #define RELAY_FAN_PIN       13    // Fan relay GPIO
+#define LIGHT_PIN           10    // Light sensor (ADC)
+#define PIR_PIN             38    // PIR motion sensor (digital)
 
 // ============================================================
 // RELAY CONFIGURATION
@@ -34,6 +36,9 @@
 
 #define RELAY_TASK_STACK    2048
 #define RELAY_TASK_PRIO     1
+
+#define AUTO_RELAY_TASK_STACK   2048
+#define AUTO_RELAY_TASK_PRIO    2
 
 #define HTTP_UPLOAD_TASK_STACK  4096
 #define HTTP_UPLOAD_TASK_PRIO   2
