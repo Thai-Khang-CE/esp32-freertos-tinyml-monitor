@@ -5,10 +5,11 @@ LiquidCrystal_I2C lcd(33,16,2);
 
 
 void temp_humi_monitor(void *pvParameters){
+    pinMode(PIR_PIN, INPUT);
+    pinMode(LIGHT_PIN, INPUT);
 
     Wire.begin(11, 12);
     dht20.begin();
-    pinMode(PIR_PIN, INPUT);
 
     lcd.begin();
     lcd.backlight();
@@ -37,6 +38,7 @@ void temp_humi_monitor(void *pvParameters){
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Sensor Error!");
+            vTaskDelay(5000 / portTICK_PERIOD_MS);
             //return;
         } else
         {
@@ -72,6 +74,25 @@ void temp_humi_monitor(void *pvParameters){
             } else { 
                 lcd.print("NORM ");
             }
+
+            vTaskDelay(2500 / portTICK_PERIOD_MS);
+
+            // --- MÀN HÌNH 2: HIỂN THỊ PIR & ÁNH SÁNG ---
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print("PIR: ");
+            if (human_inside) { // Có người
+                lcd.print("Motion!");
+            } else {                // Không có người
+                lcd.print("Clear  ");
+            }
+
+            lcd.setCursor(0, 1);
+            lcd.print("Light: ");
+            lcd.print(read_light);
+
+            // Dừng 2.5 giây trước khi quay lại màn hình 1
+            vTaskDelay(2500 / portTICK_PERIOD_MS);
         }
 
         // Print the results
