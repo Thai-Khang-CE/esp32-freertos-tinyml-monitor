@@ -41,6 +41,7 @@ void temp_humi_monitor(void *pvParameters){
             vTaskDelay(5000 / portTICK_PERIOD_MS);
             //return;
         } else
+        
         {
         SensorData sensordata;
         sensordata.temperature = temperature;

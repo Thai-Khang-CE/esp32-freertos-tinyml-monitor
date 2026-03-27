@@ -1,21 +1,59 @@
-#ifndef CE_AUTO_RELAY_TASK_C
-#define CE_AUTO_RELAY_TASK_C
+#ifndef CE_AUTO_RELAY_TASK_H
+#define CE_AUTO_RELAY_TASK_H
 
+#include <Arduino.h>
 #include "ce_config_global.h"
 #include "ce_data_types.h"
 
-/*
-@brief Task to automatically control relays
-@Logic: 
-      Fanauto: on when temp > 30C and human inside
-               off when no human
-      Lightauto: on when human inside and base on light sensor 
-                off when no human    
-@return: void
-@author : Thai Khang and Dat     
-*/
-void ce_auto_relay_task(void *parameter);
+/*============================================================
+  SMART HOME CE AUTO RELAY TASK
+  
+  Purpose: Automatically control relays based on sensor data
+  
+  Logic:
+    - FAN Auto: ON when temp > 30°C AND human inside
+               OFF when no human
+    - LIGHT Auto: ON when human inside AND light level < threshold
+                 OFF when no human
+  
+  Queue: Receives SensorData from xQueueTempHumiForMain
+  External Control: IsLight_Auto, IsFan_Auto flags to enable/disable modes
+  
+  Author: Thai Khang & Dat
+  ============================================================*/
 
+/**
+ * @brief Control fan based on temperature and human presence
+ * @param temperature Current temperature reading
+ * @param human_inside Whether human is inside
+ */
+static void control_fan_auto(float temperature, bool human_inside);
+
+/**
+ * @brief Control light based on human presence and light level
+ * @param light_level Current light sensor reading (0-4095)
+ * @param human_inside Whether human is inside
+ */
+static void control_light_auto(uint16_t light_level, bool human_inside);
+
+/**
+ * @brief Set relay state with debounce
+ */
+static void relay_set(uint8_t pin, bool state);
+
+
+/**
+ * @brief Initialize relay pins and sensors
+ */
+static void relay_auto_init(void);
+
+   
+/**
+ * @brief FreeRTOS task for automatic relay control
+ * Receives temperature/humidity from queue and controls relays accordingly
+ * @param parameter FreeRTOS task parameter (unused)
+ */
+void ce_auto_relay_task(void *parameter);
 
 #endif
 
