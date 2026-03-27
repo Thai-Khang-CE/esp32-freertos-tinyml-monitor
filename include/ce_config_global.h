@@ -18,7 +18,7 @@
 // HARDWARE PINS
 // ============================================================
 #define RELAY_LIGHT_PIN     12    // Light relay GPIO
-#define RELAY_FAN_PIN       13    // Fan relay GPIO
+#define RELAY_FAN_PIN       48   // Fan relay GPIO
 #define LIGHT_PIN           10    // Light sensor (ADC)
 #define PIR_PIN             38    // PIR motion sensor (digital)
 

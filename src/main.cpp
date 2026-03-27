@@ -21,9 +21,9 @@ void setup()
   
   // Create legacy tasks (old project)
   xTaskCreate(temp_humi_monitor, "Task TEMP HUMI Monitor", 4096, NULL, 2, NULL);
-  xTaskCreate(tiny_ml_task, "Tiny ML Task" ,8192  ,NULL  ,2 , NULL);
-  xTaskCreate(ce_auto_relay_task, "Auto Relay Task", 4096, NULL, 2, NULL);
-  
+  // xTaskCreate(tiny_ml_task, "Tiny ML Task" ,8192  ,NULL  ,2 , NULL);
+   xTaskCreate(ce_auto_relay_task, "Auto Relay Task", 4096, NULL, 2, NULL);
+
   Serial.println("[BOOT] Setup complete - all tasks created");
 }
 

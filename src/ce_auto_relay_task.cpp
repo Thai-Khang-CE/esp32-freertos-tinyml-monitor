@@ -32,7 +32,7 @@ static void control_fan_auto(float temperature, bool human_inside) {
     // Fan ON conditions:
     // 1. Temperature > 30°C AND
     // 2. Human inside
-    if (temperature > 30.0f && human_inside) {
+    if (temperature > 20.0f && human_inside) {
         should_fan_be_on = true;
     } else {
         should_fan_be_on = false;

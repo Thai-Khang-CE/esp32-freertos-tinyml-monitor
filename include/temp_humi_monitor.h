@@ -5,8 +5,6 @@
 #include "DHT20.h"
 #include "ce_config_global.h"
 
-#define LIGHT_PIN 10
-#define PIR_PIN 38
 void temp_humi_monitor(void *pvParameters);
 
 
