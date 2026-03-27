@@ -22,10 +22,32 @@
   Author: Thai Khang & Dat
   ============================================================*/
 
-// ============================================================
-// MAIN TASK FUNCTION
-// ============================================================
+/**
+ * @brief Control fan based on temperature and human presence
+ * @param temperature Current temperature reading
+ * @param human_inside Whether human is inside
+ */
+static void control_fan_auto(float temperature, bool human_inside);
 
+/**
+ * @brief Control light based on human presence and light level
+ * @param light_level Current light sensor reading (0-4095)
+ * @param human_inside Whether human is inside
+ */
+static void control_light_auto(uint16_t light_level, bool human_inside);
+
+/**
+ * @brief Set relay state with debounce
+ */
+static void relay_set(uint8_t pin, bool state);
+
+
+/**
+ * @brief Initialize relay pins and sensors
+ */
+static void relay_auto_init(void);
+
+   
 /**
  * @brief FreeRTOS task for automatic relay control
  * Receives temperature/humidity from queue and controls relays accordingly

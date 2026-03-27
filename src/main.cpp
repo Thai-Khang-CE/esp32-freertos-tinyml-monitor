@@ -22,12 +22,7 @@ void setup()
   // Create legacy tasks (old project)
   xTaskCreate(temp_humi_monitor, "Task TEMP HUMI Monitor", 4096, NULL, 2, NULL);
   xTaskCreate(tiny_ml_task, "Tiny ML Task" ,8192  ,NULL  ,2 , NULL);
- 
-  
-  // Create CE tasks
-  Serial.println("[BOOT] Creating CE tasks...");
-  xTaskCreate(wifi_manager_task, "WiFi Manager", WIFI_TASK_STACK, NULL, WIFI_TASK_PRIO, NULL);
-  xTaskCreate(ce_auto_relay_task, "Auto Relay", AUTO_RELAY_TASK_STACK, NULL, AUTO_RELAY_TASK_PRIO, NULL);
+  xTaskCreate(ce_auto_relay_task, "Auto Relay Task", 4096, NULL, 2, NULL);
   
   Serial.println("[BOOT] Setup complete - all tasks created");
 }

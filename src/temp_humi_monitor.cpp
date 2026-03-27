@@ -39,6 +39,7 @@ void temp_humi_monitor(void *pvParameters){
             lcd.print("Sensor Error!");
             //return;
         } else
+        
         {
         SensorData sensordata;
         sensordata.temperature = temperature;
